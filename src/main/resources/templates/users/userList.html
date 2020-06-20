@@ -1,0 +1,27 @@
+<div th:replace="parts/header"></div>
+
+<h3>Список всех пользователей</h3>
+
+Всего пользователей: <b>[[${count}]]</b>
+
+<table id="mainTable" class="users_table">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>id</th>
+        <th>Username</th>
+        <th>Баланс</th>
+        <th>Роли</th>
+    </tr>
+    </thead>
+    <tr th:each="user, state : ${users}">
+        <td>[[${state.index} + 1]]</td>
+        <td>[[${user.id}]]</td>
+        <td>[[${user.username}]]</td>
+        <td>[[${user.balance}]]</td>
+        <td>[[${user.roles}]]</td>
+    </tr>
+</table>
+
+
+<div th:replace="parts/footer"></div>

@@ -1,0 +1,9 @@
+<div th:replace="parts/header"></div>
+
+<h3>Страница баланса</h3>
+
+<div th:if="${currentUser != null}">
+    Ваш баланс: <b>[[${currentUser.balance}]]</b>
+</div>
+
+<div th:replace="parts/footer"></div>

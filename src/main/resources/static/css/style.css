@@ -1,0 +1,107 @@
+body {background:#e0e0e0;margin: 0px 0px 0px 0px}
+
+div#wrapper {}
+
+div#message {padding:0px 0px 10px 0px;font-size:14pt;font-weight:bold}
+
+div#container {width:960px;padding:10px 20px 10px 20px;background: #ffffff;}
+
+h1 {color:#1504a2; fint-size:14pt;margin:5px 0px 5px 0px;}
+h2 {color:#1504a2; fint-size:13pt}
+h3 {color:#1504a2; fint-size:12pt}
+
+a {color:#1504a2; text-decoration: none;}
+
+hr {
+    border: 0;
+    border-bottom: 2px dashed #d0d0d0;
+    background: #1504a2;
+}
+
+table.users_table {width:100%;border:1px solid #808080;border-collapse: collapse;}
+table.users_table thead {text-align: left}
+table.users_table td, table.users_table th {vertical-align: top;border: 1px solid #1504a2;padding: 12px;}
+table.users_table tr:nth-child(even), table.users_table th {background: linear-gradient(to bottom, #fcfff4, #e9e9ce);}
+
+div#mainDescr {font-size:13pt;line-height:1.5}
+
+div.div_action {padding:6px;margin:0px 0px 0px 0px;}
+
+a.AActionButton {
+    margin:0px 0px 6px 0px;
+    border: 1px solid #333333;
+    display: inline-block;
+    padding: 0px 15px;
+    text-decoration: none;
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+    color: #000000;
+}
+a.AActionButton:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+    color: #1504a2;
+}
+
+div.bottomHR {
+    border-bottom:1px solid #1504a2;
+    padding:0px 0px 8px 0px;
+    margin:0px 0px 8px 0px;
+}
+
+div#admin_pls {
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+    padding:10px;margin:0px 0px 10px 0px;border:1px solid #1504a2
+}
+
+div.invalid-feedback {color:#ff0000; font-size:10pt;}
+
+table#main_user_register_table td, table#main_user_list_filter_table td {padding:5px 20px 5px 0px;valign:top;border:0px;vertical-align: top}
+table.user_register_table td, table.user_edit_table td, table.user_list_filter_table td {padding: 6px 6px 6px 0px;vertical-align:top;border:0px;}
+
+div.good {color:#339933;}
+
+div.error {color:#dd0000;}
+
+div#nav {
+    background: linear-gradient(to bottom, #1504ff, #150465);
+    padding:10px 0px 10px 0px;margin:0px 0px 10px 0px;
+}
+
+.currentNavItem {
+    background: linear-gradient(to bottom, #aaaaff, #aaaa99);
+}
+
+div#nav a {padding:12px;color:#ffffff;}
+div#nav a:hover {
+    background: linear-gradient(to bottom, #aaaaff, #aaaa99);
+}
+
+div#navAndFilter {padding: 10px 0px 10px 0px; background:#ffffff;border-top:1px solid #888888;}
+div.filterSize {float:left}
+div.NavChain {float:right}
+div.NavChain a, div.NavChain span {font-size: 14pt; padding:5px;}
+div.both {clear:both}
+
+#mask{position:absolute;left:0;top:0;z-index:9000;background:#888888;display:none;opacity:0.5}
+#loader {position:fixed;z-index:10000;display:none;background:#ffffff;border:3px solid #1504a2;border-radius:15px;padding:10px}
+.modal_window .window{position:fixed;display:none;z-index:9999;overflow:hidden;min-width:200px;width:auto;max-width:900%;
+    min-height:50px;height:auto;max-height:1000px;background:#ffffff;border:4px solid #1504a2}
+.modal_window .top {
+    width:100%;
+    /*background:#1504a2;*/
+    background: linear-gradient(to bottom, #1504ff, #150465);
+    color:#ffffff;font-weight:bold;padding:8px 12px 12px 12px;
+}
+.modal_window .content {background:#ffffff;padding:10px 12px 10px 12px;margin:0px 0px 0px 0px;width:100%;height:100%;left:0;top:0;overflow:scroll}
+.modal_window .close {width:40px;float:right;color:#ffffff;font-weight:bold;cursor:pointer;border-radius:0px}
+.modal_window .name {float:left;}
+
+div.noneUser, div.currentUser {float:right;}
+
+span.required {color:#ff0000}
+
+div#footer {background: linear-gradient(to bottom, #fcfff4, #e9e9ce);padding:25px;margin:10px 0px 0px 0px;}
+
+div#userMenu {display: none;position:absolute;margin:20px 0px 0px 0px;}
+div#userMenu a {color:#ffffff; padding: 9px;margin: 0px 0px 0px 0px;background: linear-gradient(to bottom, #1504ff, #150465); }
+div#userAll:hover div#userMenu {display: block}

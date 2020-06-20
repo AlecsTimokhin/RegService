@@ -1,0 +1,17 @@
+<div id="UpdateFormProfile" xmlns:th="http://www.w3.org/1999/html">
+
+    <th:block th:if="${currentUser != null}">
+        <div class="error" th:if="${currentUser.active == false}">
+            Ваш профиль неактивен!<br>
+            Вы не можете его редактировать.<br>
+            Обратитесь к администратору сервиса.
+            <hr>
+        </div>
+    </th:block>
+
+    Ваш username: <b>[[${currentUser.username}]]</b>
+    <br>
+    Баланс вашего счета: <b>[[${currentUser.balance}]]</b>
+
+
+</div>

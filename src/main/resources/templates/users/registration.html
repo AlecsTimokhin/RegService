@@ -1,0 +1,89 @@
+<div id="AllForm">
+
+    <div id="message" class=""></div>
+
+    <form class='AjaxForm' method='post' name='RegNewUser' action="/users">
+
+        <table id="main_user_register_table">
+            <tr>
+                <td valign="top">
+
+                    <table class="user_register_table">
+
+                        <tr>
+                            <td><label>Логин <span class="required">*</span></label></td>
+                            <td>
+                                <input type="text" name="username" value="" placeholder="Alecs" />
+                                <div id="usernameError" class="invalid-feedback">
+                                    [[${usernameError}]]
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Пароль <span class="required">*</span></label></td>
+                            <td>
+                                <input type="password" name="password" value="" placeholder="Password" />
+                                <div id="passwordError" class="invalid-feedback">
+                                    [[${passwordError}]]
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Повтор пароля <span class="required">*</span></label></td>
+                            <td>
+                                <input type="password" name="password2" value="" placeholder="Retype password" />
+                                <div id="password2Error" class="invalid-feedback">
+                                    [[${password2Error}]]
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+
+        <div th:if="${canDoActions == true}">
+            Роли пользователя <span class="required">*</span>
+            <div th:each="role, state : ${roles}">
+                <label>
+                    <th:block th:if="${user == null}">
+                        <label><input type="checkbox" name="roles" th:value="${role}">[[${role}]]</label>
+                    </th:block>
+                    <th:block th:unless="${user == null}">
+                        <label>
+                            <input th:if="${user.roles.contains(role)}" type="checkbox" name="roles" th:value="${role}" checked>
+                            <input th:unless="${user.roles.contains(role)}" type="checkbox" name="roles" th:value="${role}">
+                            [[${role}]]
+                        </label>
+                    </th:block>
+                </label>
+            </div>
+            <div id="rolesError" class="invalid-feedback">
+                [[${rolesError}]]
+            </div>
+        </div>
+
+        <hr>
+        <input type="hidden" name="updatePass" value="1" />
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        <input type="reset" value="Сбросить">
+        <!--<input type="submit" value="Регистрация">-->
+        <input type="button" class="send_button" value="Регистрация">
+
+    </form>
+
+
+    <script>
+        $(document).ready(function(){
+            $('div#AllForm').find('.send_button').click(function(){
+                var flag = [[${USE_CAPTCHA == true ? true : false}]]
+                SendAjaxFormRest('div#AllForm', '/rest/users', 5000, 'POST', flag);
+            });
+        });
+    </script>
+
+</div>

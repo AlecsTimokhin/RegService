@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="description" content="Сервис перевода денег"/>
+
+    <title>[[${title}]]</title>
+
+    <meta id="tokenValue" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="tokenHeaderName" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
+
+    <script src="/static/js/jquery_3.1.1_min.js"></script>
+
+    <script src="/static/js/main.js"></script>
+
+</head>
+<body>
+
+<div id="wrapper" align="center">
+    <div id="container" align="left">
+
+        <th:block th:if="${currentUser != null}">
+            <div id="admin_pls" th:if="${canDoActions == true}">
+                <table width="100%">
+                    <tr>
+                        <td align="left">
+
+                            Админ-панель:
+
+                            <a href="javascript://" onclick="loadDataToModalWindow('#Registration', '/users/registration', 2000);">
+                                Новый пользователь
+                            </a>
+
+                        </td>
+                        <td align="right">
+                            <span th:if="${currentUser.roles != null}">Роли: [[${currentUser.roles}]]</span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </th:block>
+
+
+        <div align="center"><h2><a href="/">Сервис авторизации</a></h2></div>
+
+
+        <div id="nav">
+
+            <b><a id="mainA" href="/">Главная</a></b>
+
+            <th:block th:if="${currentUser != null}">
+                <b><a class="navItem" href="/users/balance">Страница баланса</a></b>
+            </th:block>
+
+            <th:block th:if="${canDoActions == true}">
+                <b><a target="_blank" class="navItem" href="/users/all">Список Users</a></b>
+                <b><a target="_blank" class="navItem" href="/rest/users">REST Users</a></b>
+            </th:block>
+
+            <div class="noneUser" th:if="${currentUser == null}">
+                <a href="javascript://" onclick="loadDataToModalWindow('#Registration', '/users/registration', 2000);">Регистрация</a>
+                <a class="navItem" href="/login">Войти на сервис</a>
+            </div>
+
+            <th:block th:if="${currentUser != null}">
+
+                <div class="currentUser">
+
+                    <div id="userAll">
+                        <a id="myProfile" href="javascript://" onclick="loadDataToModalWindow('#Profile', '/users/profile', 2000);"
+                           th:title="${currentUser.active == true ? 'Ваш профиль пользователя' : 'Ваш профиль неактивный!'}"
+                           th:style="${currentUser.active == true ? '' : 'color:#333333'}">
+                            Вы вошли как: <b>[[${currentUser.username}]]</b> |
+                            Ваш баланс: <b>[[${currentUser.balance}]]</b>
+                        </a>
+
+                        <a href="javascript://" onclick="$('#logout_form').submit()">Выйти</a>
+
+                        <form id="logout_form" style="display:none" action="/logout" method="post">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                            <button type="submit">Выйти</button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+            </th:block>
+
+        </div>
+
+        <!-- Само модальное окно регистрации нового пользователя -->
+        <div class="modal_window">
+            <div id="Registration" class="window">
+                <div class="top">
+                    <div class="name">Регистрация нового пользователя</div>
+                    <div class="close" title="Закрыть">X</div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="content"></div>
+                <!--<div th:replace="users/registration"></div> не пишу, так как не стоит сразу загружать JS для Капчи. Только через AJAX-->
+            </div>
+        </div>
+
+        <!-- Само модальное окно профиля текущего пользователя -->
+        <div class="modal_window">
+            <div id="Profile" class="window">
+                <div class="top">
+                    <div class="name">Ваш профиль пользователя</div>
+                    <div class="close" title="Закрыть">X</div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="content"></div>       <!--<div th:replace="users/userProfile"></div>-->
+            </div>
+        </div>
