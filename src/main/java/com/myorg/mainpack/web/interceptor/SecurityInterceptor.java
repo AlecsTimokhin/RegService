@@ -64,7 +64,8 @@ public class SecurityInterceptor implements HandlerInterceptor /*extends Handler
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
+        // Обнуляем последнюю ошибку Spring Secutity
+        request.getSession().setAttribute("SPRING_SECURITY_LAST_EXCEPTION", null);
     }
 
 
