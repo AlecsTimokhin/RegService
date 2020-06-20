@@ -70,7 +70,6 @@ alecsander.timokhin@yandex.ru<br>
 как <b>User</b> (логин: <b>User</b>, пароль: <b>123</b>).
 <hr>
 
-
 <h3>Используемый стек технологий Проекта</h3>
 
 Проект построен на <b>Spring Boot</b> с использованием <b>Spring MVC</b>, <b>Spring JDBC</b> (без ORM!), <b>Spring Security</b>. 

@@ -2,14 +2,6 @@
 
 <h3>Авторизация на сервисе</h3>
 
-<div th:if="${param.error != null}" class="error">
-    <!--
-    [[${session['SPRING_SECURITY_LAST_EXCEPTION'].message}]]
-    <br>
-    [[${session['SPRING_SECURITY_LAST_EXCEPTION'].toString()}]]
-    -->
-</div>
-
 <div th:if="${message != null}" th:class="${status}">[[${message}]] Код ошибки: <b>[[${errorCode}]]</b></div>
 
 <div th:if="${currentUser != null}">
