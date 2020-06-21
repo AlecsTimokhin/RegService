@@ -42,6 +42,12 @@ public class UserRestController {
     @Value("${goodReg}")
     private String goodReg;
 
+    @Value("${goodDeleteUser}")
+    private String goodDeleteUser;
+
+    @Value("${badDeleteUser}")
+    private String badDeleteUser;
+
     private UserService userService;
     public UserService getUserService() { return userService; }
     @Autowired
@@ -100,6 +106,20 @@ public class UserRestController {
 
         log.info("Новый пользователь успешно зарегистрирован url:( " + request.getRequestURL() + " )");
         return ResponseEntity.status(201).body( new RestResponce(goodReg + "<br> Код ошибки: 0", "good", 0) );
+
+    }
+
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<RestResponce> deleteDocument(@PathVariable("id") Long id) {
+
+        if( userService.deleteDocument(id) ){
+            return ResponseEntity.status(200).body( new RestResponce(goodDeleteUser, "good") );
+        }
+        else{
+            return ResponseEntity.status(200).body( new RestResponce(badDeleteUser, "error") );
+        }
 
     }
 

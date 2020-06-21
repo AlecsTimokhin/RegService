@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +102,13 @@ public class UserService implements UserDetailsService {
             throw new ConflictException( new RestResponce(STR + "Код ошибки: 1", "error", 1) );
         }
 
+    }
+
+
+    @CacheEvict(cacheNames = {"users"}, allEntries = true)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public boolean deleteDocument(Long id) {
+        return userRepository.delete(id);
     }
 
 

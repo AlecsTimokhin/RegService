@@ -423,3 +423,65 @@ function clearInputsInModalWindow() {
     mw.find('.invalid-feedback').html('');
     mw.find('textarea').val('');
 }
+
+
+function deleteUser(id, time, tr){
+
+    $('div#message').html('');
+
+    $.ajax({
+        url: '/rest/users/' + id,
+        cache: false,
+        type: 'DELETE',
+        timeout: time,
+        success: function(data){
+            var div = $('div#message');
+            showMessage(div);
+            div.html(data.message);
+            div.addClass(data.status);
+            tr.detach();
+            reFreshUserData();
+        },
+        error: function(data){
+            var div = $('div#message');
+            showMessage(div);
+            div.html('Ошибка удаления пользователя!');
+            div.addClass('error');
+        },
+        complete: function(){
+            hideMessage();
+        }
+    });
+
+}
+
+
+
+function showMessage(div) {
+    div.stop(true);
+    div.css("opacity", 1.0);
+    div.removeClass();
+    div.show();
+}
+
+
+function hideMessage() {
+    var div = $('div#message');
+    div.animate({
+        opacity: 0.2,
+    }, 2500, function() {
+        div.hide(800);
+        div.html('');
+    });
+}
+
+
+function reFreshUserData(){
+    var trArr = $('tr.userTr');
+    $('b#countUsers').text( '' + trArr.length + '' );
+    var i = 0;
+    trArr.each(function(){
+        i++;
+        $(this).find('td.numberTd').text('' + i + '');
+    });
+}

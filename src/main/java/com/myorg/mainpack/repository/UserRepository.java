@@ -79,6 +79,12 @@ public class UserRepository {
     }
 
 
+    @Transactional
+    public boolean delete(Long id){
+        return jdbcTemplate.update("DELETE FROM users WHERE id=?", id) != 0;
+    }
+
+
     private void insertRoles(User u) {
         Set<Role> roles = u.getRoles();
         if (!CollectionUtils.isEmpty(roles)) {

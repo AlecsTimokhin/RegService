@@ -2,7 +2,9 @@
 
 <h3>Список всех пользователей</h3>
 
-Всего пользователей: <b>[[${count}]]</b>
+<div align="center" id="message" th:class="${status}">[[${message}]]</div>
+
+Всего пользователей: <b id="countUsers">[[${count}]]</b>
 
 <table id="mainTable" class="users_table">
     <thead>
@@ -12,14 +14,19 @@
         <th>Username</th>
         <th>Баланс</th>
         <th>Роли</th>
+        <th th:if="${canDoActions == true}">Удалить пользователя</th>
     </tr>
     </thead>
-    <tr th:each="user, state : ${users}">
-        <td>[[${state.index} + 1]]</td>
+    <tr class="userTr" th:each="user, state : ${users}">
+        <td class="numberTd">[[${state.index} + 1]]</td>
         <td>[[${user.id}]]</td>
         <td>[[${user.username}]]</td>
         <td>[[${user.balance}]]</td>
         <td>[[${user.roles}]]</td>
+        <td th:if="${canDoActions == true}">
+            <a href="javascript://" th:onclick="@{deleteUser(} + ${user.id} + @{, 3000, $(this).parents('tr'));}">Удалить</a>
+        </td>
+
     </tr>
 </table>
 
