@@ -7,6 +7,8 @@ import com.myorg.mainpack.model.User;
 import com.myorg.mainpack.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,6 +43,7 @@ public class UserService implements UserDetailsService {
 
 
     @Override
+    @Cacheable("users")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -58,6 +61,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    @Cacheable("users")
     public List<UserDto> getAll(){
 
         List<UserDto> userDtoList = new ArrayList<>();
@@ -73,6 +77,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    @CacheEvict(cacheNames = {"users"}, allEntries = true)
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void save(UserDto userDto){
 

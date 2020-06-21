@@ -72,7 +72,9 @@ alecsander.timokhin@yandex.ru<br>
 
 <h3>Используемый стек технологий Проекта</h3>
 
-Проект построен на <b>Spring Boot</b> с использованием <b>Spring MVC</b>, <b>Spring JDBC</b> (без ORM!), <b>Spring Security</b>. 
+Проект построен на <b>Spring Boot</b> с использованием <b>Spring MVC</b>, <b>Spring JDBC</b> (без ORM!), 
+<b>Spring Security</b>, <b>Spring Cache</b>.
+
 Пароли пользователей хешируются алгоритмом <b>BCrypt</b>
 
 В качестве базы данных используется встроенная <b>HSQL_DB</b>. При старте Проекта в ней инициализируется определенный набор данных.
@@ -94,5 +96,7 @@ alecsander.timokhin@yandex.ru<br>
 При наличие ошибок на стророне сервера, клиенту передается "код ошибки" (errorCode = 2) внутри сложного объекта <b>RestResponce</b>. 
 
 На Сервисе предусмотрена защита от <b>XSS</b> и <b>CSRF</b> атак.
+
+Для уменьшения нагрузки на базу данных, в проекте используется <b>Spring Cache</b>.
 
 </div>
