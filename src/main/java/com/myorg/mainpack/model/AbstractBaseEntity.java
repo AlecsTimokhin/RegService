@@ -1,6 +1,5 @@
 package com.myorg.mainpack.model;
 
-import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
 import javax.persistence.*;
 
@@ -41,7 +40,7 @@ public abstract class AbstractBaseEntity implements Persistable<Long> {
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
-        if (o == null || !getClass().equals(Hibernate.getClass(o))) { return false; }
+        if (o == null || !getClass().equals(o.getClass())) { return false; }
         AbstractBaseEntity abstractBaseEntity = (AbstractBaseEntity) o;
         return id != null && id.equals(abstractBaseEntity.id);
     }

@@ -20,7 +20,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
@@ -94,7 +93,9 @@ public class UserRestController {
             }
         }
         else {
-            userDto.setRoles( Set.of(Role.USER) );
+            //userDto.setRoles( Set.of(Role.USER) );
+            userDto.setRoles( new HashSet<>() );
+            userDto.getRoles().add( Role.USER );
         }
 
         // Проверка @Valid User на правильность

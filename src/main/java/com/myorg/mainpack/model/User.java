@@ -3,8 +3,6 @@ package com.myorg.mainpack.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.myorg.mainpack.dto.UserDto;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.validation.constraints.Size;
@@ -33,8 +31,8 @@ public class User extends AbstractBaseEntity implements UserDetails {
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "USER_ROLES", joinColumns = @JoinColumn(name = "USER_ID"))
-    @Enumerated(EnumType.STRING)
-    @Fetch(FetchMode.SUBSELECT)
+    //@Enumerated(EnumType.STRING)
+    //@Fetch(FetchMode.SUBSELECT)
     private Set<Role> roles;
 
 

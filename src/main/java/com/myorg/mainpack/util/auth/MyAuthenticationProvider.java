@@ -17,14 +17,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Component("myAuthenticationProvider")
+@Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     UserService userService;
 
 
+
     public MyAuthenticationProvider(){}
+
 
 
     @Override

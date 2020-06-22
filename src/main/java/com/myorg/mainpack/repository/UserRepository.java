@@ -30,6 +30,7 @@ public class UserRepository {
 
     private final SimpleJdbcInsert insertUser;
 
+    @Autowired
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 

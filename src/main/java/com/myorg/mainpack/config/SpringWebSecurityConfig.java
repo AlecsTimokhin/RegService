@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,9 +26,9 @@ public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${passwordEncoderStrength}")
     private int passwordEncoderStrength;
 
-    @Autowired
+/*    @Autowired
     @Qualifier("myAuthenticationProvider")
-    AuthenticationProvider authenticationProvider;
+    AuthenticationProvider authenticationProvider;*/
 
     @Autowired
     private UserService userService;
@@ -65,7 +66,7 @@ public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //http.csrf().disable();
         // Отключение _csrf для REST запросов
-        http.csrf().ignoringAntMatchers("/rest/**");
+        //http.csrf().ignoringAntMatchers("/rest/**");
 
     }
 

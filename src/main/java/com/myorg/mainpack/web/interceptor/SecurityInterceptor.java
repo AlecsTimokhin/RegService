@@ -2,7 +2,7 @@ package com.myorg.mainpack.web.interceptor;
 
 import com.myorg.mainpack.model.Role;
 import com.myorg.mainpack.model.User;
-import com.sun.istack.Nullable;
+//import com.sun.istack.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -52,7 +52,7 @@ public class SecurityInterceptor implements HandlerInterceptor /*extends Handler
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response,
                            Object handler,
-                           @Nullable ModelAndView modelAndView) throws Exception {
+                           /*@Nullable*/ ModelAndView modelAndView) throws Exception {
 
         if (modelAndView != null && !modelAndView.isEmpty()) {
             modelAndView.getModelMap().addAttribute("currentUser", request.getSession().getAttribute("currentUser"));

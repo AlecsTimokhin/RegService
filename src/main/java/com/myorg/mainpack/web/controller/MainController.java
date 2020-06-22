@@ -6,8 +6,12 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 
 @Controller
@@ -47,6 +51,12 @@ public class MainController {
         model.addAttribute("title", loginTitle);
         return "users/login";
     }
+
+
+/*    @PostMapping(value = "/login")
+    public ModelAndView getLoginPage(@RequestParam Optional<String> error) {
+        return new ModelAndView("users/login", "error", error);
+    }*/
 
 
 }
