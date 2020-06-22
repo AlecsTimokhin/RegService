@@ -15,9 +15,13 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -99,7 +103,7 @@ public class SpringConfig implements WebMvcConfigurer {
     /*
      * STEP 1 - Create SpringResourceTemplateResolver
      * */
-    @Bean
+/*    @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
@@ -109,9 +113,9 @@ public class SpringConfig implements WebMvcConfigurer {
         templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
-    /*
+    *//*
      * STEP 2 - Create SpringTemplateEngine
-     * */
+     * *//*
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -119,16 +123,16 @@ public class SpringConfig implements WebMvcConfigurer {
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
-    /*
+    *//*
      * STEP 3 - Register ThymeleafViewResolver
-     * */
+     * *//*
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding("UTF-8");
         registry.viewResolver(resolver);
-    }
+    }*/
 
 
 /*    // For JSP
@@ -140,6 +144,21 @@ public class SpringConfig implements WebMvcConfigurer {
         resolver.setViewClass(JstlView.class);
         return resolver;
     }*/
+
+    // For Apache Tiles
+    @Bean
+    public ViewResolver getViewResolver() {
+        UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+        viewResolver.setViewClass(TilesView.class);
+
+        return viewResolver;
+    }
+    @Bean
+    public TilesConfigurer getTilesConfigurer() {
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions("/WEB-INF/tiles.xml");
+        return tilesConfigurer;
+    }
 
 
     @Bean
