@@ -24,7 +24,9 @@
         <spring.version>5.2.5.RELEASE</spring.version>
         <spring-data-jpa.version>2.2.6.RELEASE</spring-data-jpa.version>
         <spring.security.version>5.3.1.RELEASE</spring.security.version>
-        <tomcat.version>9.0.31</tomcat.version>
+
+        <!--Tomcat-->
+        <tomcat.version>8.0.28</tomcat.version>
 
         <!--DB-->
         <hsql_db.version>2.3.4</hsql_db.version>
