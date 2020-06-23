@@ -5,24 +5,42 @@
 <tiles-definitions>
 
     <!-- Templates -->
-    <!--Base Template-->
     <definition name="base.page" template="/WEB-INF/views/layouts/baseTemplate.jsp">
         <put-attribute name="header" value="/WEB-INF/views/parts/header.jsp" />
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/views/parts/footer.jsp" />
     </definition>
-    <!--For AJAX Template-->
     <definition name="ajax.page" template="/WEB-INF/views/layouts/ajaxTemplate.jsp">
         <put-attribute name="body" value="" />
     </definition>
 
+
     <!--For Base Template-->
-    <definition name="*" extends="base.page">
-        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    <!-- Main Page -->
+    <definition name="mainPage" extends="base.page">
+        <put-attribute name="body" value="/WEB-INF/views/mainPage.jsp" />
     </definition>
-    <definition name="*/*" extends="base.page">
-        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+    <!-- Login Page -->
+    <definition name="users/login" extends="base.page">
+        <put-attribute name="body" value="/WEB-INF/views/users/login.jsp" />
     </definition>
+    <!-- Error 404 -->
+    <definition name="error/404" extends="base.page">
+        <put-attribute name="body" value="/WEB-INF/views/error/404.jsp" />
+    </definition>
+    <!-- Error 500 -->
+    <definition name="error/exception" extends="base.page">
+        <put-attribute name="body" value="/WEB-INF/views/error/exception.jsp" />
+    </definition>
+    <!-- Balance page -->
+    <definition name="users/balance" extends="base.page">
+        <put-attribute name="body" value="/WEB-INF/views/users/balance.jsp" />
+    </definition>
+    <!-- Users list -->
+    <definition name="users/userList" extends="base.page">
+        <put-attribute name="body" value="/WEB-INF/views/users/userList.jsp" />
+    </definition>
+
 
     <!--For AJAX Template-->
     <!-- Profile page -->

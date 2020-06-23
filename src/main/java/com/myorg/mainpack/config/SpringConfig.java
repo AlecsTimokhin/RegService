@@ -1,6 +1,7 @@
 package com.myorg.mainpack.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.myorg.mainpack.exception.CustomSimpleMappingExceptionResolver;
 import com.myorg.mainpack.web.interceptor.SecurityInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -8,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.Ordered;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -15,6 +18,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -26,6 +31,9 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
+import javax.ws.rs.InternalServerErrorException;
+import java.util.Properties;
+
 import static com.myorg.mainpack.util.json.JacksonObjectMapper.getMapper;
 
 
@@ -150,7 +158,6 @@ public class SpringConfig implements WebMvcConfigurer {
     public ViewResolver getViewResolver() {
         UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
         viewResolver.setViewClass(TilesView.class);
-
         return viewResolver;
     }
     @Bean
@@ -165,6 +172,29 @@ public class SpringConfig implements WebMvcConfigurer {
     public ObjectMapper getJacksonObjectMapper() {
         return getMapper();
     }
+
+
+/*    @Bean
+    HandlerExceptionResolver customExceptionResolver () {
+        CustomSimpleMappingExceptionResolver resolver = new CustomSimpleMappingExceptionResolver();
+        Properties mappings = new Properties();
+        // Mapping Spring internal error NoHandlerFoundException to a view name
+        mappings.setProperty(NoHandlerFoundException.class.getName(), "error/404");
+*//*        mappings.setProperty(InternalServerErrorException.class.getName(), "error/exception");
+        mappings.setProperty(NullPointerException.class.getName(), "error/exception");
+        mappings.setProperty(ClassNotFoundException.class.getName(), "error/exception");
+        mappings.setProperty(Exception.class.getName(), "error/exception");*//*
+        resolver.setExceptionMappings(mappings);
+        // Set specific HTTP codes
+        resolver.addStatusCode("error/404", HttpStatus.NOT_FOUND.value());
+*//*        resolver.addStatusCode("500", HttpStatus.INTERNAL_SERVER_ERROR.value());*//*
+        resolver.setDefaultErrorView("error/exception");
+        resolver.setDefaultStatusCode(200);
+        // This resolver will be processed before the default ones
+        resolver.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        resolver.setExceptionAttribute("exception");
+        return resolver;
+    }*/
 
 
     @Override

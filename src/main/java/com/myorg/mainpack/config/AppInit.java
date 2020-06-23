@@ -8,10 +8,10 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
-
 import javax.servlet.*;
 
 
+// https://qarus.ru/20277883-ispolzovanie-spring-mvc-webapplicationinitializer-applicationcontextinitializer-i-contextloaderlistener/
 public class AppInit implements WebApplicationInitializer {
 
     private static final Class<?>[] configurationClasses = new Class<?>[]{
@@ -23,22 +23,28 @@ public class AppInit implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
 
+        // ApplicationContext
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
         appContext.register(configurationClasses);
 
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("SpringDispatcher",
-                new DispatcherServlet(appContext));
+        // DispatcherServlet
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(appContext);
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
+        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("SpringDispatcher", dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
 
         // UtF8 Charactor Filter.
         FilterRegistration.Dynamic fr = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
-
         fr.setInitParameter("encoding", "UTF-8");
         fr.setInitParameter("forceEncoding", "true");
         fr.addMappingForUrlPatterns(null, true, "/*");
 
+        // Spring Security Filter
         registerSpringSecurityFilterChain(servletContext);
+
+        // Context Listener
+        registerListener(servletContext);
 
     }
 
