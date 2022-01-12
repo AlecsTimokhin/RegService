@@ -21,7 +21,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 
         <!--Spring-->
-        <spring.version>5.2.5.RELEASE</spring.version>
+        <spring.version>5.3.14</spring.version>
         <spring-data-jpa.version>2.2.6.RELEASE</spring-data-jpa.version>
         <spring.security.version>5.3.1.RELEASE</spring.security.version>
 
