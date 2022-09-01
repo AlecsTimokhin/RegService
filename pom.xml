@@ -35,7 +35,7 @@
         <jackson-json.version>2.10.3</jackson-json.version>
 
         <!--jsoup-->
-        <jsoup.version>1.13.1</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
 
         <!--Cache-->
         <ehcache.version>3.8.1</ehcache.version>
