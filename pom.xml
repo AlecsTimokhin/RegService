@@ -32,7 +32,7 @@
         <hsql_db.version>2.3.4</hsql_db.version>
 
         <!--JSON-->
-        <jackson-json.version>2.10.3</jackson-json.version>
+        <jackson-json.version>2.12.6.1</jackson-json.version>
 
         <!--jsoup-->
         <jsoup.version>1.13.1</jsoup.version>
